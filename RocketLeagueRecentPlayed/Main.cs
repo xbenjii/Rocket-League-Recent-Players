@@ -34,7 +34,7 @@ namespace RocketLeagueRecentPlayed
             DialogResult result = folderBrowserDialog1.ShowDialog();
             if(result == DialogResult.OK)
             {
-                string[] logFiles = Directory.GetFiles(folderBrowserDialog1.SelectedPath);
+                IEnumerable<string> logFiles = Directory.EnumerateFiles(folderBrowserDialog1.SelectedPath, "*.log");
                 foreach(string fileName in logFiles)
                 {
                     LogListBox.Items.Add(fileName);
@@ -50,19 +50,24 @@ namespace RocketLeagueRecentPlayed
             if (LogListBox.SelectedItems.Count == 1)
             {
                 string currentLogFile = LogListBox.SelectedItem.ToString();
-                StreamReader file = new StreamReader(currentLogFile);
-                string line;
-                while ((line = file.ReadLine()) != null)
+                try
                 {
-                    Match match = Regex.Match(line, @"Name=(.+?) ID=Steam-(.+?)-0");
-                    if (match.Success)
+                    IEnumerable<string> lines = File.ReadLines(currentLogFile);
+                    foreach (string line in lines)
                     {
-                        SteamUser user = new SteamUser { UserName = match.Groups[1].Value, ID = match.Groups[2].Value };
-                        if (UserListBox.Items.Contains(user.UserName))
+                        Match match = Regex.Match(line, @"Name=(.+?) ID=Steam-(.+?)-0");
+                        if (match.Success)
                         {
-                            UserListBox.Items.Add(match.Value);
+                            SteamUser user = new SteamUser { UserName = match.Groups[1].Value, ID = match.Groups[2].Value };
+                            if (UserListBox.Items.Contains(user.UserName))
+                            {
+                                UserListBox.Items.Add(match.Value);
+                            }
                         }
                     }
+                } catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
