@@ -12,14 +12,19 @@ using System.Text.RegularExpressions;
 
 namespace RocketLeagueRecentPlayed
 {
-    public partial class Form1 : Form
+    public class SteamUser
     {
-        public Form1()
+        public string UserName { get; set; }
+        public string ID { get; set; }
+    }
+    public partial class Main : Form
+    {
+        public Main()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void OpenLogBtn_Click(object sender, EventArgs e)
         {
             string path = Environment.GetEnvironmentVariable("UserProfile") + @"\Documents\My Games\Rocket League\TAGame\Logs\";
             if (Directory.Exists(path))
@@ -32,17 +37,19 @@ namespace RocketLeagueRecentPlayed
                 string[] logFiles = Directory.GetFiles(folderBrowserDialog1.SelectedPath);
                 foreach(string fileName in logFiles)
                 {
-                    listBox1.Items.Add(fileName);
+                    LogListBox.Items.Add(fileName);
                 }
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void LogListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBox2.Items.Clear();
-            if (listBox1.SelectedItems.Count == 1)
+            UserListBox.Items.Clear();
+            UserListBox.DisplayMember = "UserName";
+            UserListBox.ValueMember = "ID";
+            if (LogListBox.SelectedItems.Count == 1)
             {
-                string currentLogFile = listBox1.SelectedItem.ToString();
+                string currentLogFile = LogListBox.SelectedItem.ToString();
                 StreamReader file = new StreamReader(currentLogFile);
                 string line;
                 while ((line = file.ReadLine()) != null)
@@ -50,22 +57,22 @@ namespace RocketLeagueRecentPlayed
                     Match match = Regex.Match(line, @"Name=(.+?) ID=Steam-(.+?)-0");
                     if (match.Success)
                     {
-                        //SteamUser user = new SteamUser { name = match.Groups[1].Value, id = match.Groups[2].Value };
-                        if (!listBox2.Items.Contains(match.Value))
+                        SteamUser user = new SteamUser { UserName = match.Groups[1].Value, ID = match.Groups[2].Value };
+                        if (UserListBox.Items.Contains(user.UserName))
                         {
-                            listBox2.Items.Add(match.Value);
+                            UserListBox.Items.Add(match.Value);
                         }
                     }
                 }
             }
         }
 
-        private void listBox2_DoubleClick(object sender, EventArgs e)
+        private void UserListBox_DoubleClick(object sender, EventArgs e)
         {
-            if(listBox2.SelectedItems.Count == 1)
+            if(UserListBox.SelectedItems.Count == 1)
             {
-                Match match = Regex.Match(listBox2.SelectedItem.ToString(), @"Name=(.+?) ID=Steam-(.+?)-0");
-                System.Diagnostics.Process.Start("https://steamcommunity.com/profiles/" + match.Groups[2].Value);
+                SteamUser selected = (SteamUser) UserListBox.SelectedItem;
+                System.Diagnostics.Process.Start("https://steamcommunity.com/profiles/" + selected.ID);
             }
         }
     }
