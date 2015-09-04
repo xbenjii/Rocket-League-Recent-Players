@@ -6,7 +6,6 @@ c:\users\benjamin\documents\visual studio 2015\Projects\RocketLeagueRecentPlayed
 c:\users\benjamin\documents\visual studio 2015\Projects\RocketLeagueRecentPlayed\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.csproj.GenerateResource.Cache
 c:\users\benjamin\documents\visual studio 2015\Projects\RocketLeagueRecentPlayed\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.exe
 c:\users\benjamin\documents\visual studio 2015\Projects\RocketLeagueRecentPlayed\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.pdb
-C:\Users\Benjamin\Documents\Visual Studio 2015\Projects\RocketLeagueRecentPlayed\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.Form1.resources
 C:\c#\Rocket-League-Recent-Players\RocketLeagueRecentPlayed\bin\Debug\RocketLeagueRecentPlayed.exe.config
 C:\c#\Rocket-League-Recent-Players\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.exe
 C:\c#\Rocket-League-Recent-Players\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.pdb
@@ -16,3 +15,4 @@ C:\c#\Rocket-League-Recent-Players\RocketLeagueRecentPlayed\obj\Debug\RocketLeag
 C:\c#\Rocket-League-Recent-Players\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.Properties.Resources.resources
 C:\c#\Rocket-League-Recent-Players\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.csproj.GenerateResource.Cache
 C:\c#\Rocket-League-Recent-Players\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.SteamUser.resources
+C:\Users\Benjamin\Documents\Visual Studio 2015\Projects\RocketLeagueRecentPlayed\RocketLeagueRecentPlayed\obj\Debug\RocketLeagueRecentPlayed.SteamUser.resources
